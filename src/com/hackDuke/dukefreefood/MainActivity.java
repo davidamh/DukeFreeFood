@@ -2,6 +2,8 @@ package com.hackDuke.dukefreefood;
 
 import java.util.Locale;
 
+import com.google.android.gms.maps.MapFragment;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -45,6 +47,7 @@ public class MainActivity extends FragmentActivity {
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 
+		mViewPager.setCurrentItem(1);
 	}
 
 	@Override
@@ -69,17 +72,22 @@ public class MainActivity extends FragmentActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a DummySectionFragment (defined as a static inner class
 			// below) with the page number as its lone argument.
-			Fragment fragment = new DummySectionFragment();
-			Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
-			fragment.setArguments(args);
-			return fragment;
+			if(position == 0) {
+				Fragment fragment = new DummySectionFragment();
+				Bundle args = new Bundle();
+				args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, position + 1);
+				fragment.setArguments(args);
+				return fragment;
+			}
+			else {
+				//TODO make the map fragment work
+				return null;
+			}
 		}
 
 		@Override
 		public int getCount() {
-			// Show 3 total pages.
-			return 3;
+			return 2;
 		}
 
 		@Override
@@ -87,11 +95,9 @@ public class MainActivity extends FragmentActivity {
 			Locale l = Locale.getDefault();
 			switch (position) {
 			case 0:
-				return getString(R.string.title_section1).toUpperCase(l);
+				return getString(R.string.title_make_event).toUpperCase(l);
 			case 1:
-				return getString(R.string.title_section2).toUpperCase(l);
-			case 2:
-				return getString(R.string.title_section3).toUpperCase(l);
+				return getString(R.string.title_map).toUpperCase(l);
 			}
 			return null;
 		}
@@ -118,8 +124,10 @@ public class MainActivity extends FragmentActivity {
 					container, false);
 			TextView dummyTextView = (TextView) rootView
 					.findViewById(R.id.section_label);
-			dummyTextView.setText(Integer.toString(getArguments().getInt(
-					ARG_SECTION_NUMBER)));
+//			dummyTextView.setText(Integer.toString(getArguments().getInt(
+//					ARG_SECTION_NUMBER)));
+			dummyTextView.setText("Butts!");
+
 			return rootView;
 		}
 	}
