@@ -2,7 +2,7 @@ package com.hackDuke.dukefreefood;
 
 import java.util.Locale;
 
-import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.SupportMapFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -80,8 +80,7 @@ public class MainActivity extends FragmentActivity {
 				return fragment;
 			}
 			else {
-				//TODO make the map fragment work
-				return null;
+				return SupportMapFragment.newInstance();
 			}
 		}
 
@@ -124,12 +123,15 @@ public class MainActivity extends FragmentActivity {
 					container, false);
 			TextView dummyTextView = (TextView) rootView
 					.findViewById(R.id.section_label);
-//			dummyTextView.setText(Integer.toString(getArguments().getInt(
-//					ARG_SECTION_NUMBER)));
 			dummyTextView.setText("Butts!");
 
 			return rootView;
 		}
 	}
 
+	public static class MapSectionFragment extends Fragment {
+		public MapSectionFragment() {
+			
+		}
+	}
 }
